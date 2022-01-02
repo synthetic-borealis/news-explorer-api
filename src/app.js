@@ -19,6 +19,7 @@ const auth = require('./middleware/auth');
 const signupRoute = require('./routes/signup');
 const signinRoute = require('./routes/signin');
 const usersRoute = require('./routes/users');
+const articlesRoute = require('./routes/articles');
 const notFoundRoute = require('./routes/not-found-route');
 
 require('dotenv').config();
@@ -47,6 +48,7 @@ app.use(helmet());
 app.use('/signup', signupRoute);
 app.use('/signin', signinRoute);
 app.use('/users', auth, usersRoute);
+app.use('/articles', auth, articlesRoute);
 app.use(notFoundRoute);
 
 app.use(errorLogger);
