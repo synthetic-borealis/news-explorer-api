@@ -11,6 +11,11 @@ const bodyParser = require('body-parser');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 
+const {
+  requestLogger,
+  errorLogger,
+} = require('./middleware/logger');
+
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
@@ -24,7 +29,7 @@ const limiter = rateLimit({
   max: 100,
 });
 
-// TODO: add request logger here
+app.use(requestLogger);
 app.use(limiter);
 
 app.use(bodyParser.json());
@@ -38,7 +43,7 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello World!' });
 });
 
-// TODO: add error logging here
+app.use(errorLogger);
 // TODO: add error handling middleware here
 
 app.listen(PORT, () => {});
