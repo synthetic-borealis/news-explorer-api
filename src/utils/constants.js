@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const urlRegex = /^https?:\/{2}(www\.)?[a-z\0-9]{2,256}\.[a-z]{2,6}(\/[a-z0-9._~:/?%#[\]@!$&'()*+,;=]*)?/i;
 
 const responseStrings = {
@@ -17,8 +19,12 @@ const errorStrings = {
   blacklistedEmailProvider: 'Blacklisted e-mail provider',
 };
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+const secretKey = NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key';
+
 module.exports = {
   urlRegex,
   responseStrings,
   errorStrings,
+  secretKey,
 };
