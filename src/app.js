@@ -3,9 +3,6 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const {
-  // celebrate,
-  // Joi,
-  // Segments,
   errors,
 } = require('celebrate');
 const rateLimit = require('express-rate-limit');
@@ -16,10 +13,12 @@ const {
   errorLogger,
 } = require('./middleware/logger');
 const error = require('./middleware/error');
+const auth = require('./middleware/auth');
 
 // Routes
-const signup = require('./routes/signup');
-const signin = require('./routes/signin');
+const signupRoute = require('./routes/signup');
+const signinRoute = require('./routes/signin');
+const usersRoute = require('./routes/users');
 const notFoundRoute = require('./routes/not-found-route');
 
 require('dotenv').config();
@@ -45,8 +44,9 @@ mongoose.connect('mongodb://localhost:27017/newsexplorer');
 
 app.use(helmet());
 
-app.use('/signup', signup);
-app.use('/signin', signin);
+app.use('/signup', signupRoute);
+app.use('/signin', signinRoute);
+app.use('/users', auth, usersRoute);
 app.use(notFoundRoute);
 
 app.use(errorLogger);
