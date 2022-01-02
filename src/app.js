@@ -2,12 +2,12 @@ const express = require('express');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-// const {
-//   celebrate,
-//   Joi,
-//   Segments,
-//   errors,
-// } = require('celebrate');
+const {
+  // celebrate,
+  // Joi,
+  // Segments,
+  errors,
+} = require('celebrate');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
 
@@ -15,6 +15,7 @@ const {
   requestLogger,
   errorLogger,
 } = require('./middleware/logger');
+const error = require('./middleware/error');
 
 require('dotenv').config();
 
@@ -44,6 +45,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(errorLogger);
-// TODO: add error handling middleware here
+app.use(errors());
+app.use(error);
 
 app.listen(PORT, () => {});
