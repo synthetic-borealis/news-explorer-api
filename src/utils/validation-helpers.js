@@ -1,5 +1,6 @@
 const validator = require('validator');
 const domainBlacklist = require('./domain-blacklist');
+const { urlRegex } = require('./constants');
 const BlacklistedMailProviderError = require('../errors/blacklisted-mail-provider-err');
 
 const validateEmail = (value, helpers) => {
@@ -13,6 +14,18 @@ const validateEmail = (value, helpers) => {
   return helpers.error('strings.email');
 };
 
+const isValidEmail = (email) => {
+  if (validator.isEmail(email)) {
+    const hostDomain = email.split('@')[1];
+    return !domainBlacklist.includes(hostDomain);
+  }
+  return false;
+};
+
+const isValidURL = (url) => urlRegex.test(url);
+
 module.exports = {
   validateEmail,
+  isValidEmail,
+  isValidURL,
 };
