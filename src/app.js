@@ -15,12 +15,8 @@ const {
 const error = require('./middleware/error');
 const auth = require('./middleware/auth');
 
-// Routes
-const signupRoute = require('./routes/signup');
-const signinRoute = require('./routes/signin');
-const usersRoute = require('./routes/users');
-const articlesRoute = require('./routes/articles');
-const notFoundRoute = require('./routes/not-found-route');
+const routes = require('./routes');
+const notFoundRoute = require('./middleware/not-found-route');
 
 require('dotenv').config();
 
@@ -45,10 +41,13 @@ mongoose.connect('mongodb://localhost:27017/newsexplorer');
 
 app.use(helmet());
 
-app.use('/signup', signupRoute);
-app.use('/signin', signinRoute);
-app.use('/users', auth, usersRoute);
-app.use('/articles', auth, articlesRoute);
+routes.forEach((route) => {
+  if (route.isProtected) {
+    app.use(route.path, auth, route.handler);
+  } else {
+    app.use(route.path, route.handler);
+  }
+});
 app.use(notFoundRoute);
 
 app.use(errorLogger);
