@@ -12,6 +12,7 @@ const responseStrings = {
   // Other Responses
   userCreated: 'User created',
   articleSaved: 'Article saved',
+  articleDeleted: 'Article deleted',
 };
 
 const errorStrings = {
