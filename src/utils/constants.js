@@ -9,6 +9,7 @@ const responseStrings = {
   badRequest: 'Bad request',
   serverError: 'An error has occured on the server',
   unauthorized: 'Unauthorized action',
+  emailIsUsed: 'The provided e-mail address is already in use',
   // Other Responses
   userCreated: 'User created',
   articleSaved: 'Article saved',

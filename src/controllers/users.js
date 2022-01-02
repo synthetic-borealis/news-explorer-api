@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
+const EmailIsUsedError = require('../errors/email-is-used-err');
+
 const { secretKey } = require('../utils/constants');
 
 const getCurrentUser = (req, res, next) => {
@@ -30,7 +32,13 @@ const createUser = (req, res, next) => {
     .then((user) => {
       res.status(201).send({ data: user });
     })
-    .catch(next);
+    .catch((error) => {
+      if (error.code && error.code === 11000) {
+        next(new EmailIsUsedError());
+      } else {
+        next(error);
+      }
+    });
 };
 
 const login = (req, res, next) => {

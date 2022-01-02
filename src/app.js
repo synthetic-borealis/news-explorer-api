@@ -18,6 +18,7 @@ const {
 const error = require('./middleware/error');
 
 // Routes
+const signup = require('./routes/signup');
 const notFoundRoute = require('./routes/not-found-route');
 
 require('dotenv').config();
@@ -43,9 +44,7 @@ mongoose.connect('mongodb://localhost:27017/newsexplorer');
 
 app.use(helmet());
 
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Hello World!' });
-});
+app.use('/signup', signup);
 app.use(notFoundRoute);
 
 app.use(errorLogger);
