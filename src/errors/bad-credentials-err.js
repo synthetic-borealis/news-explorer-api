@@ -1,7 +1,7 @@
-const { messageStrings } = require('../utils/constants');
+const { responseStrings } = require('../utils/constants');
 
 class BadCredentialsError extends Error {
-  constructor(message = messageStrings.badCredentials) {
+  constructor(message = responseStrings.badCredentials) {
     super(message);
     this.statusCode = 401;
   }

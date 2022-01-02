@@ -1,3 +1,4 @@
+// Domains associated with known throwaway e-mail providers
 const domainBlacklist = [
   '0815.ru',
   '0wnd.net',
