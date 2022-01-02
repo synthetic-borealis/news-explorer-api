@@ -17,6 +17,9 @@ const {
 } = require('./middleware/logger');
 const error = require('./middleware/error');
 
+// Routes
+const notFoundRoute = require('./routes/not-found-route');
+
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
@@ -43,6 +46,7 @@ app.use(helmet());
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Hello World!' });
 });
+app.use(notFoundRoute);
 
 app.use(errorLogger);
 app.use(errors());
