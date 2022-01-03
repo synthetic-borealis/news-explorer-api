@@ -29,7 +29,7 @@ const createUser = (req, res, next) => {
       password: hash,
       name,
     }))
-    .then((user) => User.findOne(user)
+    .then((createdUser) => User.findOne(createdUser)
       .then((user) => {
         res.status(201).send({ data: user });
       }))
