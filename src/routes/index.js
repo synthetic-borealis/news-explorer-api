@@ -7,12 +7,10 @@ module.exports = [
   {
     path: '/signup',
     handler: signupRoute,
-    isProtected: false,
   },
   {
     path: '/signin',
     handler: signinRoute,
-    isProtected: false,
   },
   {
     path: '/users',
