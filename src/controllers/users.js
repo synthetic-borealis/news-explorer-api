@@ -29,9 +29,10 @@ const createUser = (req, res, next) => {
       password: hash,
       name,
     }))
-    .then((user) => {
-      res.status(201).send({ data: user });
-    })
+    .then((user) => User.findOne(user)
+      .then((user) => {
+        res.status(201).send({ data: user });
+      }))
     .catch((error) => {
       if (error.code && error.code === errorCodes.mongoDuplicateKeyError) {
         next(new EmailIsUsedError());
