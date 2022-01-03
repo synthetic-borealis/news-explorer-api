@@ -21,6 +21,10 @@ const notFoundRoute = require('./middleware/not-found-route');
 require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
+const {
+  dbUrl,
+} = require('./utils/constants');
+
 const app = express();
 
 app.options('*', cors());
@@ -37,7 +41,7 @@ app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/newsexplorer');
+mongoose.connect(dbUrl);
 
 app.use(helmet());
 

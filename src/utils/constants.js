@@ -21,12 +21,25 @@ const errorStrings = {
   blacklistedEmailProvider: 'Blacklisted e-mail provider',
 };
 
-const { NODE_ENV, JWT_SECRET } = process.env;
+const errorCodes = {
+  mongoDuplicateKeyError: 11000,
+};
+
+const {
+  NODE_ENV,
+  JWT_SECRET,
+  DB_HOST = 'localhost',
+  DB_PORT = 27017,
+  DB_NAME = 'newsexplorer',
+} = process.env;
 const secretKey = NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key';
+const dbUrl = NODE_ENV === 'production' ? `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}` : 'mongodb://localhost:27017/newsexplorer';
 
 module.exports = {
   urlRegex,
   responseStrings,
   errorStrings,
+  errorCodes,
   secretKey,
+  dbUrl,
 };

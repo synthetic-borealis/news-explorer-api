@@ -5,7 +5,7 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-err');
 const EmailIsUsedError = require('../errors/email-is-used-err');
 
-const { secretKey } = require('../utils/constants');
+const { errorCodes, secretKey } = require('../utils/constants');
 
 const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -33,7 +33,7 @@ const createUser = (req, res, next) => {
       res.status(201).send({ data: user });
     })
     .catch((error) => {
-      if (error.code && error.code === 11000) {
+      if (error.code && error.code === errorCodes.mongoDuplicateKeyError) {
         next(new EmailIsUsedError());
       } else {
         next(error);
