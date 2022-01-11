@@ -7,7 +7,7 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "lint": "npx eslint .",
-    "lint-and-log": "npx eslint . > lint.log",
+    "lint:log": "npx eslint . > lint.log",
     "gen-env": "node util_scripts/generate-env.js",
     "gen-domain-blacklist": "node util_scripts/generate-domain-blacklist.mjs",
     "test": "jest"
