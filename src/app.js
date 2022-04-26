@@ -20,7 +20,7 @@ const notFoundRoute = require('./middleware/not-found-route');
 
 require('dotenv').config();
 
-const { PORT = 3000 } = process.env;
+const { PORT = 4000 } = process.env;
 const {
   dbUrl,
 } = require('./utils/constants');
