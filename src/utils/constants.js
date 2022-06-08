@@ -28,12 +28,13 @@ const errorCodes = {
 const {
   NODE_ENV,
   JWT_SECRET,
-  DB_HOST = 'localhost',
-  DB_PORT = 27017,
-  DB_NAME = 'newsexplorer',
+  // DB_HOST = 'localhost',
+  // DB_PORT = 27017,
+  // DB_NAME = 'newsexplorer',
 } = process.env;
 const secretKey = NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key';
-const dbUrl = NODE_ENV === 'production' ? `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}` : 'mongodb://localhost:27017/newsexplorer';
+// const dbUrl = NODE_ENV === 'production' ? `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}` : 'mongodb://localhost:27017/newsexplorer';
+const { dbUrl } = require('./secret-constants');
 
 module.exports = {
   urlRegex,
