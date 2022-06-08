@@ -16,3 +16,6 @@ node_modules
 
 # Misc
 package-lock.json
+
+# Secret constants
+secret-constants.js
